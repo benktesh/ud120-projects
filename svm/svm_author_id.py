@@ -36,12 +36,9 @@ print "Training time:", round(time()-t0, 3), "s"
 
 t0 = time()
 pred = clf.predict(features_test)
-print "Testing time:", round(time()-t0, 3), "s"
-print(clf.score(features_test, labels_test))
+print 'Testing time:', round(time()-t0, 3), "s"
 
 #########################################################
-
-
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(pred, labels_test)
 print "Accuracy from SVM: "
