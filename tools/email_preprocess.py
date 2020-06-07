@@ -4,10 +4,10 @@ import pickle
 import cPickle
 import numpy
 
-#from sklearn import cross_validation
+from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import SelectPercentile, f_classif
-from sklearn.model_selection import train_test_split
+
 
 
 
