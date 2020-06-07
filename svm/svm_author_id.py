@@ -12,6 +12,7 @@ import sys
 from time import time
 sys.path.append("../tools/")
 from email_preprocess import preprocess
+import pprint
 
 
 ### features_train and features_test are the features for the training
@@ -27,20 +28,30 @@ labels_train = labels_train[:len(labels_train)/100]
 ### your code goes here ###
 from sklearn.svm import SVC
 
-clf = SVC(kernel="rbf")
+result = []
+CS = [10, 100, 1000, 10000]
 
-t0 = time()
-clf.fit(features_train, labels_train)
-print "Training time:", round(time()-t0, 3), "s"
+print 'Testing four C values'
+for c in CS:    
+    clf = SVC(kernel="rbf", C = c)
+
+    t0 = time()
+    clf.fit(features_train, labels_train)
+    print "Training time:", round(time()-t0, 3), "s"
 
 
 
-t0 = time()
-pred = clf.predict(features_test)
-print 'Testing time:', round(time()-t0, 3), "s"
+    t0 = time()
+    pred = clf.predict(features_test)
+    print 'Testing time:', round(time()-t0, 3), "s"
 
-#########################################################
-from sklearn.metrics import accuracy_score
-acc = accuracy_score(pred, labels_test)
-print "Accuracy from SVM: "
-print(acc)
+    #########################################################
+    from sklearn.metrics import accuracy_score
+    acc = accuracy_score(pred, labels_test)
+    print "Accuracy from SVM: "
+    print(acc)
+
+    result.append({"C": c, "accuracy": acc})
+
+pprint.pprint(result)
+print '............Done testing four C values'
