@@ -17,6 +17,13 @@
 
 import pickle
 
-enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "rb"))
+enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r+"))
+
+
+values_view = enron_data.values()
+print(len(values_view))
+value_iterator = iter(values_view)
+first_value = next(value_iterator)
+print (first_value)
 
 
