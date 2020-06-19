@@ -44,6 +44,28 @@ data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r")
 data_dict.pop("TOTAL", 0)
 
 
+#find max and min of execrcised_stock_options
+excercise_stocks = []
+for users in data_dict:
+    val = data_dict[users]["exercised_stock_options"]
+    if val == 'NaN':
+        continue
+    excercise_stocks.append(val)
+print max(excercise_stocks)
+print min(excercise_stocks)
+
+#find max and min of salary
+excercise_stocks = []
+for users in data_dict:
+    val = data_dict[users]["salary"]
+    if val == 'NaN':
+        continue
+    excercise_stocks.append(val)
+print 'Max salary', max(excercise_stocks)
+print 'Min salary', min(excercise_stocks)
+
+
+
 ### the input features we want to use 
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
 feature_1 = "salary"
@@ -59,7 +81,7 @@ poi, finance_features = targetFeatureSplit( data )
 ### you'll want to change this line to 
 ### for f1, f2, _ in finance_features:
 ### (as it's currently written, the line below assumes 2 features)
-for f1, f2, f3 in finance_features:
+for f1, f2, f3  in finance_features:
     plt.scatter( f1, f2, f3 )
 plt.show()
 
@@ -68,6 +90,8 @@ plt.show()
 from sklearn.cluster import KMeans
 clf = KMeans(n_clusters=2)
 pred = clf.fit_predict(finance_features)
+
+
 
 
 
