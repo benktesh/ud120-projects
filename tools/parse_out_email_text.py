@@ -38,16 +38,9 @@ def parseOutText(f):
 
         text_split = text_string.split()
 
-        new_text = ""
+        words = ""
         for w in text_split:
-            new_text= new_text + " " + stemmer.stem(w)
-    
-        print (new_text)
-        
-
-
-
-
+            words= words + " " + stemmer.stem(w)
     return words
 
     
