@@ -42,7 +42,7 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
         ### only look at first 200 emails when developing
         ### once everything is working, remove this line to run over full dataset
         temp_counter += 1
-        if temp_counter < 200:
+        if temp_counter >= 0:
             path = os.path.join('..', path[:-1])
             print (path)
             email = open(path, "r")
@@ -65,6 +65,7 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
 
             from_data.append(0 if name == 'sara' else 1)
 
+
             email.close()
 
 print ("emails processed")
@@ -72,8 +73,8 @@ from_sara.close()
 from_chris.close()
 
 
-pickle.dump( word_data, open("your_word_data.pkl", "w") )
-pickle.dump( from_data, open("your_email_authors.pkl", "w") )
+#pickle.dump( word_data, open("your_word_data.pkl", "w") )
+#pickle.dump( from_data, open("your_email_authors.pkl", "w") )
 
 
 print ('Word data :', word_data[152])
@@ -82,5 +83,17 @@ print ('Word data :', word_data[152])
 
 
 ### in Part 4, do TfIdf vectorization here
+
+#Transform the word_data into a tf-idf matrix using the sklearn TfIdf transformation. Remove english stopwords.
+#You can access the mapping between words and feature numbers using get_feature_names(), which returns a list of all the words in the vocabulary. How many different words are there?
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+vectorizer = TfidfVectorizer(stop_words="english",lowercase=True)
+vectorizer.fit_transform(word_data)
+print (len(vectorizer.get_feature_names()))
+
+print (vectorizer.get_feature_names()[34597])
+
 
 
