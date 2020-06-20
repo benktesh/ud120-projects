@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import sys
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
+from sklearn.preprocessing import MinMaxScaler
 
 
 
@@ -46,23 +47,39 @@ data_dict.pop("TOTAL", 0)
 
 #find max and min of execrcised_stock_options
 excercise_stocks = []
+salary = []
 for users in data_dict:
     val = data_dict[users]["exercised_stock_options"]
     if val == 'NaN':
         continue
     excercise_stocks.append(val)
-print max(excercise_stocks)
-print min(excercise_stocks)
 
-#find max and min of salary
-excercise_stocks = []
-for users in data_dict:
     val = data_dict[users]["salary"]
     if val == 'NaN':
         continue
-    excercise_stocks.append(val)
-print 'Max salary', max(excercise_stocks)
-print 'Min salary', min(excercise_stocks)
+    salary.append(val)
+print 'max exercise stock:', max(excercise_stocks)
+print 'min exercise stock:', min(excercise_stocks)
+
+print 'max salary:', max(salary)
+print 'max salary:', min(salary)
+
+
+sal = [[min(salary)*1.],[200000.0],[max(salary)*1.]]
+scaler_salary = MinMaxScaler()
+
+print 'Salary: ', sal
+rescaled_salary = scaler_salary.fit_transform(sal)
+print 'Rescaled salary: ', rescaled_salary
+
+
+scaler_stok = MinMaxScaler()
+ex_stok = [[min(excercise_stocks)],[1000000.0],[max(excercise_stocks)]]
+rescaled_stock = scaler_salary.fit_transform(ex_stok)
+print 'Rescaled ex stock:', rescaled_stock
+
+
+
 
 
 
