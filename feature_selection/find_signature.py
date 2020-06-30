@@ -10,8 +10,10 @@ numpy.random.seed(42)
 ### mini-project.
 words_file = "../text_learning/your_word_data.pkl" 
 authors_file = "../text_learning/your_email_authors.pkl"
-word_data = pickle.load( open(words_file, "r"))
-authors = pickle.load( open(authors_file, "r") )
+
+word_data = pickle.load( open(words_file, "rb"))
+enron_data = pickle.load(open("../final_project/final_project_dataset_unix.pkl", "rb"))
+authors = pickle.load( open(authors_file, "rb") )
 
 
 
@@ -19,8 +21,10 @@ authors = pickle.load( open(authors_file, "r") )
 ### remainder go into training)
 ### feature matrices changed to dense representations for compatibility with
 ### classifier functions in versions 0.15.2 and earlier
-from sklearn import cross_validation
-features_train, features_test, labels_train, labels_test = cross_validation.train_test_split(word_data, authors, test_size=0.1, random_state=42)
+from sklearn.model_selection import train_test_split
+features_train, features_test, labels_train, labels_test = train_test_split(word_data, authors, test_size=0.1, random_state=42)
+
+print ("Number of training points: ", len(labels_train))
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
@@ -38,6 +42,26 @@ labels_train   = labels_train[:150]
 
 
 ### your code goes here
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(features_train,labels_train)
+print (clf.score(features_test,labels_test))
+
+
+#Find out feature importance
+
+importances = clf.feature_importances_
+import numpy as np
+indices = np.argsort(importances)[::-1]
+print ('Feature Ranking: ')
+for i in range(10):
+    if(i == 0):
+        print (vectorizer.get_feature_names()[indices[i]])
+
+    print ("{} feature no.{} ({})".format(i+1,indices[i],importances[indices[i]]))
+
+
+print (vectorizer.get_feature_names()[21323])
 
 
 
