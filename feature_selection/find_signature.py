@@ -57,11 +57,8 @@ print ('Feature Ranking: ')
 for i in range(10):
     if(i == 0):
         print (vectorizer.get_feature_names()[indices[i]])
-
     print ("{} feature no.{} ({})".format(i+1,indices[i],importances[indices[i]]))
 
-
-print (vectorizer.get_feature_names()[21323])
 
 
 
