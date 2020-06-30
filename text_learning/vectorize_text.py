@@ -44,7 +44,7 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
         temp_counter += 1
         if temp_counter >= 0:
             path = os.path.join('..', path[:-1])
-            print (path)
+            #print (path)
             email = open(path, "r")
 
             ### use parseOutText to extract the text from the opened email
@@ -73,8 +73,8 @@ from_sara.close()
 from_chris.close()
 
 
-#pickle.dump( word_data, open("your_word_data.pkl", "w") )
-#pickle.dump( from_data, open("your_email_authors.pkl", "w") )
+pickle.dump( word_data, open("your_word_data.pkl", "wb") )
+pickle.dump( from_data, open("your_email_authors.pkl", "wb") )
 
 
 print ('Word data :', word_data[152])
@@ -87,13 +87,13 @@ print ('Word data :', word_data[152])
 #Transform the word_data into a tf-idf matrix using the sklearn TfIdf transformation. Remove english stopwords.
 #You can access the mapping between words and feature numbers using get_feature_names(), which returns a list of all the words in the vocabulary. How many different words are there?
 
-from sklearn.feature_extraction.text import TfidfVectorizer
+#from sklearn.feature_extraction.text import TfidfVectorizer
 
-vectorizer = TfidfVectorizer(stop_words="english",lowercase=True)
-vectorizer.fit_transform(word_data)
-print (len(vectorizer.get_feature_names()))
+#vectorizer = TfidfVectorizer(stop_words="english",lowercase=True)
+#vectorizer.fit_transform(word_data)
+#print (len(vectorizer.get_feature_names()))
 
-print (vectorizer.get_feature_names()[34597])
+#print (vectorizer.get_feature_names()[34597])
 
 
 
