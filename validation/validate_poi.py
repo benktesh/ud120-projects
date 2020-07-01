@@ -35,3 +35,13 @@ clf.fit(features,labels)
 score = clf.score(features, labels)
 print ("Score ", score)
 
+#do train_test_split
+# Split into a training and testing set
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.30, random_state=42)
+
+clf.fit(X_train,y_train)
+score = clf.score(X_test, y_test)
+print ("Score after split on test ", score)
+
+
