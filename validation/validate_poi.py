@@ -28,5 +28,10 @@ labels, features = targetFeatureSplit(data)
 
 
 ### it's all yours from here forward!  
-
+#create a decision tree classifier with defaults
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(features,labels)
+score = clf.score(features, labels)
+print ("Score ", score)
 
